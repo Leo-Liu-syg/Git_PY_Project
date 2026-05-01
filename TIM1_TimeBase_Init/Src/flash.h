@@ -11,20 +11,20 @@
 #define REMOTE_NUM 6
 #define DEVICE_NUM 60
 
-extern uint32_t remote_cur;
-extern uint32_t devices_cur;
-extern uint32_t sos_time;
-extern uint32_t sos_mode;
-extern uint32_t speak_mode;
-extern uint32_t sos_urgency;
-extern uint32_t remote[6];  
+extern volatile uint32_t remote_cur;
+extern volatile uint32_t devices_cur;
+extern volatile uint32_t sos_time;
+extern volatile uint32_t sos_mode;
+extern volatile uint32_t speak_mode;
+extern volatile uint32_t sos_urgency;
+extern uint32_t remote[6];
 extern uint32_t devices1[30];
 extern uint32_t devices2[30];
 
-void recovery();
-void update_control();
-void update_remote();
-void update_devices();
-void flash_init();
+void Flash_Recovery();
+void Flash_Update_Control();
+void Flash_Update_Remote();
+void Flash_Update_Devices();
+void Flash_init();
 
 #endif

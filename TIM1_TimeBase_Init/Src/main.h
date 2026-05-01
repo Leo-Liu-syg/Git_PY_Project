@@ -30,6 +30,7 @@ extern "C" {
 #include "time.h"
 #include "app.h"
 #include "speak.h"
+#include "flash.h"
 
 
 
