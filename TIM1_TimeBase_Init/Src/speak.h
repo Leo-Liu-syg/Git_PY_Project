@@ -1,8 +1,6 @@
 #ifndef __SPEAK_H__
 #define __SPEAK_H__
 
-#include <stdint.h>
-
 #include "main.h"
 
 enum speak_58042
@@ -18,8 +16,8 @@ enum speak_58042
     SPEAK_URGENCY_WARNING,     // 发生紧急求助+警报声
     SPEAK_SECURE_WARNING = 10, // 安全报警，安全报警，请立即做好安全防护措施+警报声
     SPEAK_RECOVERY,            // 删除成功恢复出厂
-    SPEAK_PLACE,               // 布防
-    SPEAK_UNPLACE,             // 撤防
+    SPEAK_PLACE,               // 布防成功
+    SPEAK_UNPLACE,             // 撤防成功
     SPEAK_CANCEL,              // 取消对码
 };
 

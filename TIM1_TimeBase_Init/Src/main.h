@@ -28,6 +28,7 @@ extern "C" {
 #include "time.h"
 #include "app.h"
 #include "uart.h"
+#include "speak.h"
 
 
 #ifdef __cplusplus

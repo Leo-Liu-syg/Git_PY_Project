@@ -458,6 +458,16 @@
               <FileType>5</FileType>
               <FilePath>..\Src\uart.h</FilePath>
             </File>
+            <File>
+              <FileName>speak.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\speak.c</FilePath>
+            </File>
+            <File>
+              <FileName>speak.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\speak.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

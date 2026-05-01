@@ -10,8 +10,8 @@ I (..\..\Drivers\CMSIS\Include\core_cmInstr.h)(0x68FA639A)
 I (..\..\Drivers\CMSIS\Include\cmsis_armcc.h)(0x68FA639A)
 I (..\..\Drivers\CMSIS\Include\core_cmFunc.h)(0x68FA639A)
 I (..\..\Drivers\CMSIS\Device\PY32F0xx\Include\system_py32f0xx.h)(0x68FA639A)
-F (..\Src\main.c)(0x69F4A7A3)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (..\Src\main.h)(0x69F49433)
+F (..\Src\main.c)(0x69F4ACB8)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\Src\main.h)(0x69F4AA50)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
 I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
@@ -40,9 +40,10 @@ I (..\Src\gpio.h)(0x69F44DD5)
 I (..\Src\time.h)(0x69F4671B)
 I (..\Src\app.h)(0x69F46015)
 I (..\Src\uart.h)(0x69F4A4CA)
+I (..\Src\speak.h)(0x69F4ACA5)
 F (..\Src\gpio.c)(0x69F4698B)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\gpio.o --omf_browse .\objects\gpio.crf --depend .\objects\gpio.d)
 I (..\Src\gpio.h)(0x69F44DD5)
-I (..\Src\main.h)(0x69F49433)
+I (..\Src\main.h)(0x69F4AA50)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
 I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
@@ -70,10 +71,11 @@ I (..\Src\sys.h)(0x69F44DE1)
 I (..\Src\time.h)(0x69F4671B)
 I (..\Src\app.h)(0x69F46015)
 I (..\Src\uart.h)(0x69F4A4CA)
+I (..\Src\speak.h)(0x69F4ACA5)
 F (..\Src\gpio.h)(0x69F44DD5)()
 F (..\Src\sys.c)(0x69F46972)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\sys.o --omf_browse .\objects\sys.crf --depend .\objects\sys.d)
 I (..\Src\sys.h)(0x69F44DE1)
-I (..\Src\main.h)(0x69F49433)
+I (..\Src\main.h)(0x69F4AA50)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
 I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
@@ -101,11 +103,12 @@ I (..\Src\gpio.h)(0x69F44DD5)
 I (..\Src\time.h)(0x69F4671B)
 I (..\Src\app.h)(0x69F46015)
 I (..\Src\uart.h)(0x69F4A4CA)
+I (..\Src\speak.h)(0x69F4ACA5)
 F (..\Src\sys.h)(0x69F44DE1)()
-F (..\Src\main.h)(0x69F49433)()
+F (..\Src\main.h)(0x69F4AA50)()
 F (..\Src\app.c)(0x69F4A79E)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
 I (..\Src\app.h)(0x69F46015)
-I (..\Src\main.h)(0x69F49433)
+I (..\Src\main.h)(0x69F4AA50)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
 I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
@@ -133,10 +136,11 @@ I (..\Src\sys.h)(0x69F44DE1)
 I (..\Src\gpio.h)(0x69F44DD5)
 I (..\Src\time.h)(0x69F4671B)
 I (..\Src\uart.h)(0x69F4A4CA)
+I (..\Src\speak.h)(0x69F4ACA5)
 F (..\Src\app.h)(0x69F46015)()
 F (..\Src\time.c)(0x69F495DF)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\time.o --omf_browse .\objects\time.crf --depend .\objects\time.d)
 I (..\Src\time.h)(0x69F4671B)
-I (..\Src\main.h)(0x69F49433)
+I (..\Src\main.h)(0x69F4AA50)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
 I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
@@ -164,10 +168,11 @@ I (..\Src\sys.h)(0x69F44DE1)
 I (..\Src\gpio.h)(0x69F44DD5)
 I (..\Src\app.h)(0x69F46015)
 I (..\Src\uart.h)(0x69F4A4CA)
+I (..\Src\speak.h)(0x69F4ACA5)
 F (..\Src\time.h)(0x69F4671B)()
 F (..\Src\uart.c)(0x69F4A4CA)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
 I (..\Src\uart.h)(0x69F4A4CA)
-I (..\Src\main.h)(0x69F49433)
+I (..\Src\main.h)(0x69F4AA50)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
 I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
@@ -195,7 +200,40 @@ I (..\Src\sys.h)(0x69F44DE1)
 I (..\Src\gpio.h)(0x69F44DD5)
 I (..\Src\time.h)(0x69F4671B)
 I (..\Src\app.h)(0x69F46015)
+I (..\Src\speak.h)(0x69F4ACA5)
 F (..\Src\uart.h)(0x69F4A4CA)()
+F (..\Src\speak.c)(0x69F4ABC5)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\speak.o --omf_browse .\objects\speak.crf --depend .\objects\speak.d)
+I (..\Src\speak.h)(0x69F4ACA5)
+I (..\Src\main.h)(0x69F4AA50)
+I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E2EB2)
+I (D:\Workspace\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E2EB2)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_rcc.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Device\PY32F0xx\Include\py32f0xx.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Device\PY32F0xx\Include\py32f002bx5.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Include\core_cm0plus.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Include\core_cmInstr.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Include\cmsis_armcc.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Include\core_cmFunc.h)(0x68FA639A)
+I (..\..\Drivers\CMSIS\Device\PY32F0xx\Include\system_py32f0xx.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_bus.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_system.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_cortex.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_utils.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_pwr.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_gpio.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_adc.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_comp.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_iwdg.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_crc.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_tim.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_flash.h)(0x68FA639A)
+I (..\..\Drivers\PY32F002B_HAL_Driver\Inc\py32f002b_ll_usart.h)(0x68FA639A)
+I (..\Src\sys.h)(0x69F44DE1)
+I (..\Src\gpio.h)(0x69F44DD5)
+I (..\Src\time.h)(0x69F4671B)
+I (..\Src\app.h)(0x69F46015)
+I (..\Src\uart.h)(0x69F4A4CA)
+F (..\Src\speak.h)(0x69F4ACA5)()
 F (..\..\Drivers\BSP\PY32F002Bxx_Start_Kit\py32f002bxx_ll_Start_Kit.c)(0x69F45132)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit -I ..\..\Drivers\CMSIS\Include -I ..\..\Drivers\CMSIS\Device\PY32F0xx\Include -I ..\..\Drivers\PY32F002B_HAL_Driver\Inc-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\PY32F0xx\Include-ID:\Workspace\Keil_v5\ARM\CMSIS\Include-ID:\Workspace\Keil_v5\ARM\PACK\Puya\PY32F0xx_DFP\1.2.8\Drivers\CMSIS\Device\Puya\PY32F0xx\Include-D__UVISION_VERSION="533" -DPY32F002Bx5 -DUSE_FULL_LL_DRIVER-o .\objects\py32f002bxx_ll_start_kit.o --omf_browse .\objects\py32f002bxx_ll_start_kit.crf --depend .\objects\py32f002bxx_ll_start_kit.d)
 I (..\..\Drivers\BSP\PY32F002Bxx_Start_Kit\py32f002bxx_ll_Start_Kit.h)(0x68FA639A)
 I (D:\Workspace\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E2EB2)
