@@ -25,10 +25,12 @@ extern "C" {
 
 #include "sys.h"
 #include "gpio.h"
+#include "ev1527.h"
+#include "uart.h"
 #include "time.h"
 #include "app.h"
-#include "uart.h"
 #include "speak.h"
+
 
 
 #ifdef __cplusplus

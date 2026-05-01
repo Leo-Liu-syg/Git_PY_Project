@@ -9,8 +9,8 @@ enum EV1527_STATUS
     EV1527_DATA,
 };
 
-extern uint8_t f_ev1527;
-extern uint32_t ev1527_data;
+extern uint8_t Finish_Flag_ev1527;
+extern volatile uint32_t Final_Data_ev1527;//按下遥控器可以读到值
 void ev1527_proc();
 
 #endif

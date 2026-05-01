@@ -1,7 +1,7 @@
 #ifndef __FLASH_H__
 #define __FLASH_H__
 
-#include <stdint.h>
+#include "main.h"
 
 #define FLASH_PAGE_CONTROL 0x08004000
 #define FLASH_PAGE_REMOTE (FLASH_PAGE_CONTROL + 128)

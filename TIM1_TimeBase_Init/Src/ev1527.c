@@ -1,8 +1,7 @@
-// 包含EV1527无线解码头文件
 #include "ev1527.h"
 
 // 433数据接收完成标志位（1表示接收到一帧完整数据）
-uint8_t f_ev1527 = 0;
+uint8_t Finish_Flag_ev1527 = 0;
 
 // 已接收的bit位数统计（EV1527协议共24bit）
 uint8_t ev1527_time = 0;
@@ -20,7 +19,7 @@ uint8_t ev1527_status = EV1527_WAIT;
 uint8_t ev1527_step = 0;
 
 // 最终接收到的24位有效数据（遥控器/烟感地址+按键值）
-uint32_t ev1527_data = 0;
+volatile uint32_t Final_Data_ev1527 = 0;
 
 // 接收数据缓存（临时存储，拼接24bit）
 uint32_t ev1527_data_buffer = 0;
@@ -198,9 +197,9 @@ void ev1527_proc(void)
                     // 接收满24bit，一帧数据完成
                     if (ev1527_time >= 24)
                     {
-                        ev1527_data = ev1527_data_buffer;        // 保存有效数据
+                        Final_Data_ev1527 = ev1527_data_buffer;        // 保存有效数据
                         ev1527_time_count_down = 200;            // 200ms内不再接收
-                        f_ev1527 = 1;                            // 置位接收完成标志
+                        Finish_Flag_ev1527 = 1;                            // 置位接收完成标志
                         ev1527_exit();                           // 复位解码
                     }
                 }
@@ -241,9 +240,9 @@ void ev1527_proc(void)
                     // 接收满24bit，一帧数据完成
                     if (ev1527_time >= 24)
                     {
-                        ev1527_data = ev1527_data_buffer;        // 保存有效数据
+                        Final_Data_ev1527 = ev1527_data_buffer;        // 保存有效数据
                         ev1527_time_count_down = 200;            // 200ms内不再接收
-                        f_ev1527 = 1;                            // 置位接收完成标志
+                        Finish_Flag_ev1527 = 1;                            // 置位接收完成标志
                         ev1527_exit();                           // 复位解码
                     }
                 }

@@ -7,12 +7,15 @@ int main(void)
     Timer14_1ms_init();
     Timer1_10us_init();
     uart_init(); // 初始化 UART
-    
+
+    //语音模块测试
     for(int i = SPEAK_STOP; i <= SPEAK_CANCEL; i++)
     {
-        speak(i); // 语音提示：安全报警，安全报警，请立即做好安全防护措施+警报声
-        LL_mDelay(5000);
+        speak(i); 
+        LL_mDelay(3000);
     }
+
+    
     
     while (1)
     {
