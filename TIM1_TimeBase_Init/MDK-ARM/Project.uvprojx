@@ -404,19 +404,29 @@
               <FilePath>..\Src\main.c</FilePath>
             </File>
             <File>
+              <FileName>gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\gpio.h</FilePath>
+            </File>
+            <File>
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\sys.c</FilePath>
             </File>
             <File>
-              <FileName>time.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\time.c</FilePath>
+              <FileName>sys.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\sys.h</FilePath>
             </File>
             <File>
-              <FileName>gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\gpio.c</FilePath>
+              <FileName>main.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\main.h</FilePath>
             </File>
             <File>
               <FileName>app.c</FileName>
@@ -424,24 +434,29 @@
               <FilePath>..\Src\app.c</FilePath>
             </File>
             <File>
-              <FileName>flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>speak.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\speak.c</FilePath>
+              <FileName>app.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\app.h</FilePath>
             </File>
             <File>
               <FileName>ev1527.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\ev1527.c</FilePath>
+            </File>
+            <File>
+              <FileName>ev1527.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\ev1527.h</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\time.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\time.h</FilePath>
             </File>
           </Files>
         </Group>

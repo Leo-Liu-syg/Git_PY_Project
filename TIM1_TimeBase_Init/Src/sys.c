@@ -2,14 +2,14 @@
 #include "sys.h"
 
 // 包含主函数头文件（芯片寄存器、宏定义）
-#include "main.h"
+
 
 /**
   * @brief  系统时钟初始化配置（让芯片跑起来）
   * @param  无
   * @retval 无
   */
-void APP_SystemClockConfig(void)
+void System_Clock_Config(void)
 {
     /* 使能 SYSCFG 系统配置控制器时钟 */
     LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);

@@ -24,12 +24,9 @@ extern "C" {
 #include "py32f002b_ll_usart.h"
 
 #include "sys.h"
-#include "time.h"
 #include "gpio.h"
+#include "time.h"
 #include "app.h"
-#include "flash.h"
-#include "uart.h"
-#include "speak.h"
 #include "ev1527.h"
 
 
