@@ -4,20 +4,22 @@ Component: ARM Compiler 5.06 update 7 (build 960) Tool: armlink [4d3601]
 
 Section Cross References
 
-    system_py32f002b.o(i.SystemCoreClockUpdate) refers to uidiv.o(.text) for __aeabi_uidivmod
-    system_py32f002b.o(i.SystemCoreClockUpdate) refers to system_py32f002b.o(.data) for SystemCoreClock
-    system_py32f002b.o(i.SystemCoreClockUpdate) refers to system_py32f002b.o(.constdata) for HSIFreqTable
-    system_py32f002b.o(i.SystemInit) refers to system_py32f002b.o(i.DelayTime) for DelayTime
     startup_py32f002bxx.o(RESET) refers to startup_py32f002bxx.o(STACK) for __initial_sp
     startup_py32f002bxx.o(RESET) refers to startup_py32f002bxx.o(.text) for Reset_Handler
     startup_py32f002bxx.o(RESET) refers to time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler) for TIM1_BRK_UP_TRG_COM_IRQHandler
     startup_py32f002bxx.o(RESET) refers to time.o(i.TIM14_IRQHandler) for TIM14_IRQHandler
+    startup_py32f002bxx.o(RESET) refers to uart.o(i.USART1_IRQHandler) for USART1_IRQHandler
     startup_py32f002bxx.o(.text) refers to system_py32f002b.o(i.SystemInit) for SystemInit
     startup_py32f002bxx.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    system_py32f002b.o(i.SystemCoreClockUpdate) refers to uidiv.o(.text) for __aeabi_uidivmod
+    system_py32f002b.o(i.SystemCoreClockUpdate) refers to system_py32f002b.o(.data) for SystemCoreClock
+    system_py32f002b.o(i.SystemCoreClockUpdate) refers to system_py32f002b.o(.constdata) for HSIFreqTable
+    system_py32f002b.o(i.SystemInit) refers to system_py32f002b.o(i.DelayTime) for DelayTime
     main.o(i.main) refers to sys.o(i.System_Clock_Config) for System_Clock_Config
     main.o(i.main) refers to gpio.o(i.gpio_init) for gpio_init
     main.o(i.main) refers to time.o(i.Timer14_1ms_init) for Timer14_1ms_init
     main.o(i.main) refers to time.o(i.Timer1_10us_init) for Timer1_10us_init
+    main.o(i.main) refers to uart.o(i.uart_init) for uart_init
     main.o(i.main) refers to app.o(i.app_control) for app_control
     gpio.o(i.gpio_init) refers to gpio.o(i.LL_IOP_GRP1_EnableClock) for LL_IOP_GRP1_EnableClock
     gpio.o(i.gpio_init) refers to memseta.o(.text) for __aeabi_memclr4
@@ -26,11 +28,9 @@ Section Cross References
     sys.o(i.System_Clock_Config) refers to py32f002b_ll_utils.o(i.LL_Init1msTick) for LL_Init1msTick
     sys.o(i.System_Clock_Config) refers to py32f002b_ll_utils.o(i.LL_SetSystemCoreClock) for LL_SetSystemCoreClock
     app.o(i.app_control) refers to app.o(i.LL_GPIO_TogglePin) for LL_GPIO_TogglePin
+    app.o(i.app_control) refers to uart.o(i.USart1_Send_ASCII_Back) for USart1_Send_ASCII_Back
     app.o(i.app_control) refers to time.o(.data) for Flag_1ms
-    ev1527.o(i.ev1527_exit) refers to ev1527.o(.data) for ev1527_count
-    ev1527.o(i.ev1527_proc) refers to ev1527.o(i.LL_GPIO_IsInputPinSet) for LL_GPIO_IsInputPinSet
-    ev1527.o(i.ev1527_proc) refers to ev1527.o(i.ev1527_exit) for ev1527_exit
-    ev1527.o(i.ev1527_proc) refers to ev1527.o(.data) for ev1527_time_count_down
+    app.o(i.app_control) refers to uart.o(.data) for rx_data
     time.o(i.TIM14_IRQHandler) refers to time.o(i.LL_TIM_IsActiveFlag_UPDATE) for LL_TIM_IsActiveFlag_UPDATE
     time.o(i.TIM14_IRQHandler) refers to time.o(i.LL_TIM_IsEnabledIT_UPDATE) for LL_TIM_IsEnabledIT_UPDATE
     time.o(i.TIM14_IRQHandler) refers to time.o(i.LL_TIM_ClearFlag_UPDATE) for LL_TIM_ClearFlag_UPDATE
@@ -38,7 +38,6 @@ Section Cross References
     time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to time.o(i.LL_TIM_IsActiveFlag_UPDATE) for LL_TIM_IsActiveFlag_UPDATE
     time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to time.o(i.LL_TIM_IsEnabledIT_UPDATE) for LL_TIM_IsEnabledIT_UPDATE
     time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to time.o(i.LL_TIM_ClearFlag_UPDATE) for LL_TIM_ClearFlag_UPDATE
-    time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to ev1527.o(i.ev1527_proc) for ev1527_proc
     time.o(i.Timer14_1ms_init) refers to time.o(i.LL_APB1_GRP2_EnableClock) for LL_APB1_GRP2_EnableClock
     time.o(i.Timer14_1ms_init) refers to memseta.o(.text) for __aeabi_memclr4
     time.o(i.Timer14_1ms_init) refers to py32f002b_ll_tim.o(i.LL_TIM_Init) for LL_TIM_Init
@@ -55,6 +54,11 @@ Section Cross References
     time.o(i.Timer1_10us_init) refers to time.o(i.LL_TIM_EnableCounter) for LL_TIM_EnableCounter
     time.o(i.Timer1_10us_init) refers to time.o(i.NVIC_EnableIRQ) for NVIC_EnableIRQ
     time.o(i.Timer1_10us_init) refers to time.o(i.NVIC_SetPriority) for NVIC_SetPriority
+    uart.o(i.USART1_IRQHandler) refers to uart.o(.data) for rx_data
+    uart.o(i.uart_init) refers to memseta.o(.text) for __aeabi_memclr4
+    uart.o(i.uart_init) refers to py32f002b_ll_gpio.o(i.LL_GPIO_Init) for LL_GPIO_Init
+    uart.o(i.uart_init) refers to uart.o(i.NVIC_SetPriority) for NVIC_SetPriority
+    uart.o(i.uart_init) refers to py32f002b_ll_usart.o(i.LL_USART_Init) for LL_USART_Init
     py32f002bxx_ll_start_kit.o(i.BSP_LED_DeInit) refers to py32f002bxx_ll_start_kit.o(i.LL_GPIO_ResetOutputPin) for LL_GPIO_ResetOutputPin
     py32f002bxx_ll_start_kit.o(i.BSP_LED_DeInit) refers to py32f002bxx_ll_start_kit.o(i.LL_GPIO_SetPinMode) for LL_GPIO_SetPinMode
     py32f002bxx_ll_start_kit.o(i.BSP_LED_DeInit) refers to py32f002bxx_ll_start_kit.o(.constdata) for LED_PIN
@@ -164,11 +168,10 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
+    Removing startup_py32f002bxx.o(HEAP), (0 bytes).
     Removing system_py32f002b.o(.rev16_text), (4 bytes).
     Removing system_py32f002b.o(.revsh_text), (4 bytes).
     Removing system_py32f002b.o(i.SystemCoreClockUpdate), (156 bytes).
-    Removing system_py32f002b.o(.constdata), (128 bytes).
-    Removing startup_py32f002bxx.o(HEAP), (0 bytes).
     Removing main.o(.rev16_text), (4 bytes).
     Removing main.o(.revsh_text), (4 bytes).
     Removing main.o(.constdata), (35 bytes).
@@ -181,12 +184,12 @@ Removing Unused input sections from the image.
     Removing app.o(.rev16_text), (4 bytes).
     Removing app.o(.revsh_text), (4 bytes).
     Removing app.o(.constdata), (35 bytes).
-    Removing ev1527.o(.rev16_text), (4 bytes).
-    Removing ev1527.o(.revsh_text), (4 bytes).
-    Removing ev1527.o(.constdata), (35 bytes).
     Removing time.o(.rev16_text), (4 bytes).
     Removing time.o(.revsh_text), (4 bytes).
     Removing time.o(.constdata), (35 bytes).
+    Removing uart.o(.rev16_text), (4 bytes).
+    Removing uart.o(.revsh_text), (4 bytes).
+    Removing uart.o(.constdata), (35 bytes).
     Removing py32f002bxx_ll_start_kit.o(.rev16_text), (4 bytes).
     Removing py32f002bxx_ll_start_kit.o(.revsh_text), (4 bytes).
     Removing py32f002bxx_ll_start_kit.o(i.BSP_GetVersion), (6 bytes).
@@ -264,10 +267,7 @@ Removing Unused input sections from the image.
     Removing py32f002b_ll_usart.o(i.LL_USART_ClockInit), (76 bytes).
     Removing py32f002b_ll_usart.o(i.LL_USART_ClockStructInit), (12 bytes).
     Removing py32f002b_ll_usart.o(i.LL_USART_DeInit), (56 bytes).
-    Removing py32f002b_ll_usart.o(i.LL_USART_Init), (124 bytes).
-    Removing py32f002b_ll_usart.o(i.LL_USART_IsEnabled), (14 bytes).
-    Removing py32f002b_ll_usart.o(i.LL_USART_SetBaudRate), (306 bytes).
-    Removing py32f002b_ll_usart.o(i.LL_USART_StructInit), (26 bytes).
+    Removing py32f002b_ll_usart.o(i.LL_USART_StructInit), (24 bytes).
     Removing py32f002b_ll_rcc.o(.rev16_text), (4 bytes).
     Removing py32f002b_ll_rcc.o(.revsh_text), (4 bytes).
     Removing py32f002b_ll_rcc.o(i.LL_RCC_DeInit), (104 bytes).
@@ -276,15 +276,10 @@ Removing Unused input sections from the image.
     Removing py32f002b_ll_rcc.o(i.LL_RCC_GetLPTIMClockFreq), (112 bytes).
     Removing py32f002b_ll_rcc.o(i.LL_RCC_GetLSCClockFreq), (68 bytes).
     Removing py32f002b_ll_rcc.o(i.LL_RCC_GetMCOClockFreq), (216 bytes).
-    Removing py32f002b_ll_rcc.o(i.LL_RCC_GetSysClkSource), (16 bytes).
-    Removing py32f002b_ll_rcc.o(i.LL_RCC_GetSystemClocksFreq), (28 bytes).
     Removing py32f002b_ll_rcc.o(i.LL_RCC_LSE_IsReady), (16 bytes).
     Removing py32f002b_ll_rcc.o(i.LL_RCC_LSI_IsReady), (16 bytes).
-    Removing py32f002b_ll_rcc.o(i.RCC_GetHCLKClockFreq), (44 bytes).
-    Removing py32f002b_ll_rcc.o(i.RCC_GetPCLK1ClockFreq), (40 bytes).
-    Removing py32f002b_ll_rcc.o(i.RCC_GetSystemClockFreq), (112 bytes).
 
-119 unused section(s) (total 6039 bytes) removed from the image.
+110 unused section(s) (total 5225 bytes) removed from the image.
 
 ==============================================================================
 
@@ -295,21 +290,21 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ..\..\Drivers\BSP\PY32F002Bxx_Start_Kit\py32f002bxx_ll_Start_Kit.c 0x00000000   Number         0  py32f002bxx_ll_start_kit.o ABSOLUTE
     ..\..\Drivers\PY32F002B_HAL_Driver\Src\py32f002b_ll_adc.c 0x00000000   Number         0  py32f002b_ll_adc.o ABSOLUTE
@@ -318,13 +313,13 @@ Image Symbol Table
     ..\..\Drivers\PY32F002B_HAL_Driver\Src\py32f002b_ll_tim.c 0x00000000   Number         0  py32f002b_ll_tim.o ABSOLUTE
     ..\..\Drivers\PY32F002B_HAL_Driver\Src\py32f002b_ll_usart.c 0x00000000   Number         0  py32f002b_ll_usart.o ABSOLUTE
     ..\..\Drivers\PY32F002B_HAL_Driver\Src\py32f002b_ll_utils.c 0x00000000   Number         0  py32f002b_ll_utils.o ABSOLUTE
+    ..\..\system_py32f002b.c                 0x00000000   Number         0  system_py32f002b.o ABSOLUTE
     ..\Src\app.c                             0x00000000   Number         0  app.o ABSOLUTE
-    ..\Src\ev1527.c                          0x00000000   Number         0  ev1527.o ABSOLUTE
     ..\Src\gpio.c                            0x00000000   Number         0  gpio.o ABSOLUTE
     ..\Src\main.c                            0x00000000   Number         0  main.o ABSOLUTE
     ..\Src\sys.c                             0x00000000   Number         0  sys.o ABSOLUTE
-    ..\Src\system_py32f002b.c                0x00000000   Number         0  system_py32f002b.o ABSOLUTE
     ..\Src\time.c                            0x00000000   Number         0  time.o ABSOLUTE
+    ..\Src\uart.c                            0x00000000   Number         0  uart.o ABSOLUTE
     ..\\..\\Drivers\\BSP\\PY32F002Bxx_Start_Kit\\py32f002bxx_ll_Start_Kit.c 0x00000000   Number         0  py32f002bxx_ll_start_kit.o ABSOLUTE
     ..\\..\\Drivers\\PY32F002B_HAL_Driver\\Src\\py32f002b_ll_adc.c 0x00000000   Number         0  py32f002b_ll_adc.o ABSOLUTE
     ..\\..\\Drivers\\PY32F002B_HAL_Driver\\Src\\py32f002b_ll_gpio.c 0x00000000   Number         0  py32f002b_ll_gpio.o ABSOLUTE
@@ -332,13 +327,13 @@ Image Symbol Table
     ..\\..\\Drivers\\PY32F002B_HAL_Driver\\Src\\py32f002b_ll_tim.c 0x00000000   Number         0  py32f002b_ll_tim.o ABSOLUTE
     ..\\..\\Drivers\\PY32F002B_HAL_Driver\\Src\\py32f002b_ll_usart.c 0x00000000   Number         0  py32f002b_ll_usart.o ABSOLUTE
     ..\\..\\Drivers\\PY32F002B_HAL_Driver\\Src\\py32f002b_ll_utils.c 0x00000000   Number         0  py32f002b_ll_utils.o ABSOLUTE
+    ..\\..\\system_py32f002b.c               0x00000000   Number         0  system_py32f002b.o ABSOLUTE
     ..\\Src\\app.c                           0x00000000   Number         0  app.o ABSOLUTE
-    ..\\Src\\ev1527.c                        0x00000000   Number         0  ev1527.o ABSOLUTE
     ..\\Src\\gpio.c                          0x00000000   Number         0  gpio.o ABSOLUTE
     ..\\Src\\main.c                          0x00000000   Number         0  main.o ABSOLUTE
     ..\\Src\\sys.c                           0x00000000   Number         0  sys.o ABSOLUTE
-    ..\\Src\\system_py32f002b.c              0x00000000   Number         0  system_py32f002b.o ABSOLUTE
     ..\\Src\\time.c                          0x00000000   Number         0  time.o ABSOLUTE
+    ..\\Src\\uart.c                          0x00000000   Number         0  uart.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
     init.s                                   0x00000000   Number         0  init.o ABSOLUTE
@@ -364,49 +359,62 @@ Image Symbol Table
     i.LL_APB1_GRP2_EnableClock               0x08000184   Section        0  time.o(i.LL_APB1_GRP2_EnableClock)
     LL_APB1_GRP2_EnableClock                 0x08000185   Thumb Code    24  time.o(i.LL_APB1_GRP2_EnableClock)
     i.LL_GPIO_Init                           0x080001a0   Section        0  py32f002b_ll_gpio.o(i.LL_GPIO_Init)
-    i.LL_GPIO_IsInputPinSet                  0x0800029a   Section        0  ev1527.o(i.LL_GPIO_IsInputPinSet)
-    LL_GPIO_IsInputPinSet                    0x0800029b   Thumb Code    18  ev1527.o(i.LL_GPIO_IsInputPinSet)
-    i.LL_GPIO_SetOutputPin                   0x080002ac   Section        0  gpio.o(i.LL_GPIO_SetOutputPin)
-    LL_GPIO_SetOutputPin                     0x080002ad   Thumb Code     4  gpio.o(i.LL_GPIO_SetOutputPin)
-    i.LL_GPIO_TogglePin                      0x080002b0   Section        0  app.o(i.LL_GPIO_TogglePin)
-    LL_GPIO_TogglePin                        0x080002b1   Thumb Code     8  app.o(i.LL_GPIO_TogglePin)
-    i.LL_IOP_GRP1_EnableClock                0x080002b8   Section        0  gpio.o(i.LL_IOP_GRP1_EnableClock)
-    LL_IOP_GRP1_EnableClock                  0x080002b9   Thumb Code    24  gpio.o(i.LL_IOP_GRP1_EnableClock)
-    i.LL_Init1msTick                         0x080002d4   Section        0  py32f002b_ll_utils.o(i.LL_Init1msTick)
-    i.LL_SetSystemCoreClock                  0x080002fc   Section        0  py32f002b_ll_utils.o(i.LL_SetSystemCoreClock)
-    i.LL_TIM_ClearFlag_UPDATE                0x08000308   Section        0  time.o(i.LL_TIM_ClearFlag_UPDATE)
-    LL_TIM_ClearFlag_UPDATE                  0x08000309   Thumb Code     8  time.o(i.LL_TIM_ClearFlag_UPDATE)
-    i.LL_TIM_EnableCounter                   0x08000310   Section        0  time.o(i.LL_TIM_EnableCounter)
-    LL_TIM_EnableCounter                     0x08000311   Thumb Code    10  time.o(i.LL_TIM_EnableCounter)
-    i.LL_TIM_EnableIT_UPDATE                 0x0800031a   Section        0  time.o(i.LL_TIM_EnableIT_UPDATE)
-    LL_TIM_EnableIT_UPDATE                   0x0800031b   Thumb Code    10  time.o(i.LL_TIM_EnableIT_UPDATE)
-    i.LL_TIM_Init                            0x08000324   Section        0  py32f002b_ll_tim.o(i.LL_TIM_Init)
-    i.LL_TIM_IsActiveFlag_UPDATE             0x08000390   Section        0  time.o(i.LL_TIM_IsActiveFlag_UPDATE)
-    LL_TIM_IsActiveFlag_UPDATE               0x08000391   Thumb Code    16  time.o(i.LL_TIM_IsActiveFlag_UPDATE)
-    i.LL_TIM_IsEnabledIT_UPDATE              0x080003a0   Section        0  time.o(i.LL_TIM_IsEnabledIT_UPDATE)
-    LL_TIM_IsEnabledIT_UPDATE                0x080003a1   Thumb Code    16  time.o(i.LL_TIM_IsEnabledIT_UPDATE)
-    i.NVIC_EnableIRQ                         0x080003b0   Section        0  time.o(i.NVIC_EnableIRQ)
-    NVIC_EnableIRQ                           0x080003b1   Thumb Code    14  time.o(i.NVIC_EnableIRQ)
-    i.NVIC_SetPriority                       0x080003c4   Section        0  time.o(i.NVIC_SetPriority)
-    NVIC_SetPriority                         0x080003c5   Thumb Code   110  time.o(i.NVIC_SetPriority)
-    i.SystemInit                             0x0800043c   Section        0  system_py32f002b.o(i.SystemInit)
-    i.System_Clock_Config                    0x08000488   Section        0  sys.o(i.System_Clock_Config)
-    i.TIM14_IRQHandler                       0x08000534   Section        0  time.o(i.TIM14_IRQHandler)
-    i.TIM1_BRK_UP_TRG_COM_IRQHandler         0x0800058c   Section        0  time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler)
-    i.Timer14_1ms_init                       0x080005b4   Section        0  time.o(i.Timer14_1ms_init)
-    i.Timer1_10us_init                       0x08000614   Section        0  time.o(i.Timer1_10us_init)
-    i.__scatterload_copy                     0x08000670   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x0800067e   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x08000680   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.app_control                            0x08000690   Section        0  app.o(i.app_control)
-    i.ev1527_exit                            0x080006ec   Section        0  ev1527.o(i.ev1527_exit)
-    i.ev1527_proc                            0x08000718   Section        0  ev1527.o(i.ev1527_proc)
-    i.gpio_init                              0x08000964   Section        0  gpio.o(i.gpio_init)
-    i.main                                   0x08000a54   Section        0  main.o(i.main)
+    i.LL_GPIO_SetOutputPin                   0x0800029a   Section        0  gpio.o(i.LL_GPIO_SetOutputPin)
+    LL_GPIO_SetOutputPin                     0x0800029b   Thumb Code     4  gpio.o(i.LL_GPIO_SetOutputPin)
+    i.LL_GPIO_TogglePin                      0x0800029e   Section        0  app.o(i.LL_GPIO_TogglePin)
+    LL_GPIO_TogglePin                        0x0800029f   Thumb Code     8  app.o(i.LL_GPIO_TogglePin)
+    i.LL_IOP_GRP1_EnableClock                0x080002a8   Section        0  gpio.o(i.LL_IOP_GRP1_EnableClock)
+    LL_IOP_GRP1_EnableClock                  0x080002a9   Thumb Code    24  gpio.o(i.LL_IOP_GRP1_EnableClock)
+    i.LL_Init1msTick                         0x080002c4   Section        0  py32f002b_ll_utils.o(i.LL_Init1msTick)
+    i.LL_RCC_GetSysClkSource                 0x080002ec   Section        0  py32f002b_ll_rcc.o(i.LL_RCC_GetSysClkSource)
+    LL_RCC_GetSysClkSource                   0x080002ed   Thumb Code    10  py32f002b_ll_rcc.o(i.LL_RCC_GetSysClkSource)
+    i.LL_RCC_GetSystemClocksFreq             0x080002fc   Section        0  py32f002b_ll_rcc.o(i.LL_RCC_GetSystemClocksFreq)
+    i.LL_SetSystemCoreClock                  0x08000318   Section        0  py32f002b_ll_utils.o(i.LL_SetSystemCoreClock)
+    i.LL_TIM_ClearFlag_UPDATE                0x08000324   Section        0  time.o(i.LL_TIM_ClearFlag_UPDATE)
+    LL_TIM_ClearFlag_UPDATE                  0x08000325   Thumb Code     8  time.o(i.LL_TIM_ClearFlag_UPDATE)
+    i.LL_TIM_EnableCounter                   0x0800032c   Section        0  time.o(i.LL_TIM_EnableCounter)
+    LL_TIM_EnableCounter                     0x0800032d   Thumb Code    10  time.o(i.LL_TIM_EnableCounter)
+    i.LL_TIM_EnableIT_UPDATE                 0x08000336   Section        0  time.o(i.LL_TIM_EnableIT_UPDATE)
+    LL_TIM_EnableIT_UPDATE                   0x08000337   Thumb Code    10  time.o(i.LL_TIM_EnableIT_UPDATE)
+    i.LL_TIM_Init                            0x08000340   Section        0  py32f002b_ll_tim.o(i.LL_TIM_Init)
+    i.LL_TIM_IsActiveFlag_UPDATE             0x080003ac   Section        0  time.o(i.LL_TIM_IsActiveFlag_UPDATE)
+    LL_TIM_IsActiveFlag_UPDATE               0x080003ad   Thumb Code    16  time.o(i.LL_TIM_IsActiveFlag_UPDATE)
+    i.LL_TIM_IsEnabledIT_UPDATE              0x080003bc   Section        0  time.o(i.LL_TIM_IsEnabledIT_UPDATE)
+    LL_TIM_IsEnabledIT_UPDATE                0x080003bd   Thumb Code    16  time.o(i.LL_TIM_IsEnabledIT_UPDATE)
+    i.LL_USART_Init                          0x080003cc   Section        0  py32f002b_ll_usart.o(i.LL_USART_Init)
+    i.LL_USART_IsEnabled                     0x0800043c   Section        0  py32f002b_ll_usart.o(i.LL_USART_IsEnabled)
+    LL_USART_IsEnabled                       0x0800043d   Thumb Code    14  py32f002b_ll_usart.o(i.LL_USART_IsEnabled)
+    i.LL_USART_SetBaudRate                   0x0800044a   Section        0  py32f002b_ll_usart.o(i.LL_USART_SetBaudRate)
+    LL_USART_SetBaudRate                     0x0800044b   Thumb Code   306  py32f002b_ll_usart.o(i.LL_USART_SetBaudRate)
+    i.NVIC_EnableIRQ                         0x0800057c   Section        0  time.o(i.NVIC_EnableIRQ)
+    NVIC_EnableIRQ                           0x0800057d   Thumb Code    14  time.o(i.NVIC_EnableIRQ)
+    i.NVIC_SetPriority                       0x08000590   Section        0  time.o(i.NVIC_SetPriority)
+    NVIC_SetPriority                         0x08000591   Thumb Code   110  time.o(i.NVIC_SetPriority)
+    i.NVIC_SetPriority                       0x08000608   Section        0  uart.o(i.NVIC_SetPriority)
+    NVIC_SetPriority                         0x08000609   Thumb Code   110  uart.o(i.NVIC_SetPriority)
+    i.RCC_GetHCLKClockFreq                   0x08000680   Section        0  py32f002b_ll_rcc.o(i.RCC_GetHCLKClockFreq)
+    i.RCC_GetPCLK1ClockFreq                  0x080006ac   Section        0  py32f002b_ll_rcc.o(i.RCC_GetPCLK1ClockFreq)
+    i.RCC_GetSystemClockFreq                 0x080006d4   Section        0  py32f002b_ll_rcc.o(i.RCC_GetSystemClockFreq)
+    i.SystemInit                             0x08000744   Section        0  system_py32f002b.o(i.SystemInit)
+    i.System_Clock_Config                    0x08000790   Section        0  sys.o(i.System_Clock_Config)
+    i.TIM14_IRQHandler                       0x0800083c   Section        0  time.o(i.TIM14_IRQHandler)
+    i.TIM1_BRK_UP_TRG_COM_IRQHandler         0x08000894   Section        0  time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler)
+    i.Timer14_1ms_init                       0x080008b8   Section        0  time.o(i.Timer14_1ms_init)
+    i.Timer1_10us_init                       0x08000918   Section        0  time.o(i.Timer1_10us_init)
+    i.USART1_IRQHandler                      0x08000974   Section        0  uart.o(i.USART1_IRQHandler)
+    i.USart1_Send_ASCII_Back                 0x080009a4   Section        0  uart.o(i.USart1_Send_ASCII_Back)
+    i.__scatterload_copy                     0x080009c4   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x080009d2   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x080009d4   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.app_control                            0x080009e4   Section        0  app.o(i.app_control)
+    i.gpio_init                              0x08000a5c   Section        0  gpio.o(i.gpio_init)
+    i.main                                   0x08000b4c   Section        0  main.o(i.main)
+    i.uart_init                              0x08000b68   Section        0  uart.o(i.uart_init)
+    .constdata                               0x08000c6c   Section      128  system_py32f002b.o(.constdata)
     .data                                    0x20000000   Section        4  system_py32f002b.o(.data)
-    .data                                    0x20000004   Section       16  ev1527.o(.data)
-    .data                                    0x20000014   Section        9  time.o(.data)
-    STACK                                    0x20000020   Section     1024  startup_py32f002bxx.o(STACK)
+    .data                                    0x20000004   Section        9  time.o(.data)
+    .data                                    0x2000000d   Section        1  uart.o(.data)
+    STACK                                    0x20000010   Section     1024  startup_py32f002bxx.o(STACK)
 
     Global Symbols
 
@@ -449,7 +457,6 @@ Image Symbol Table
     RCC_IRQHandler                           0x080000eb   Thumb Code     0  startup_py32f002bxx.o(.text)
     SPI1_IRQHandler                          0x080000eb   Thumb Code     0  startup_py32f002bxx.o(.text)
     TIM1_CC_IRQHandler                       0x080000eb   Thumb Code     0  startup_py32f002bxx.o(.text)
-    USART1_IRQHandler                        0x080000eb   Thumb Code     0  startup_py32f002bxx.o(.text)
     __aeabi_uidiv                            0x080000f5   Thumb Code     0  uidiv.o(.text)
     __aeabi_uidivmod                         0x080000f5   Thumb Code    44  uidiv.o(.text)
     __aeabi_memset                           0x08000121   Thumb Code    14  memseta.o(.text)
@@ -462,38 +469,40 @@ Image Symbol Table
     __scatterload                            0x08000145   Thumb Code    28  init.o(.text)
     __scatterload_rt2                        0x08000145   Thumb Code     0  init.o(.text)
     LL_GPIO_Init                             0x080001a1   Thumb Code   250  py32f002b_ll_gpio.o(i.LL_GPIO_Init)
-    LL_Init1msTick                           0x080002d5   Thumb Code    34  py32f002b_ll_utils.o(i.LL_Init1msTick)
-    LL_SetSystemCoreClock                    0x080002fd   Thumb Code     6  py32f002b_ll_utils.o(i.LL_SetSystemCoreClock)
-    LL_TIM_Init                              0x08000325   Thumb Code   100  py32f002b_ll_tim.o(i.LL_TIM_Init)
-    SystemInit                               0x0800043d   Thumb Code    60  system_py32f002b.o(i.SystemInit)
-    System_Clock_Config                      0x08000489   Thumb Code   164  sys.o(i.System_Clock_Config)
-    TIM14_IRQHandler                         0x08000535   Thumb Code    70  time.o(i.TIM14_IRQHandler)
-    TIM1_BRK_UP_TRG_COM_IRQHandler           0x0800058d   Thumb Code    34  time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler)
-    Timer14_1ms_init                         0x080005b5   Thumb Code    86  time.o(i.Timer14_1ms_init)
-    Timer1_10us_init                         0x08000615   Thumb Code    86  time.o(i.Timer1_10us_init)
-    __scatterload_copy                       0x08000671   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x0800067f   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x08000681   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    app_control                              0x08000691   Thumb Code    80  app.o(i.app_control)
-    ev1527_exit                              0x080006ed   Thumb Code    24  ev1527.o(i.ev1527_exit)
-    ev1527_proc                              0x08000719   Thumb Code   546  ev1527.o(i.ev1527_proc)
-    gpio_init                                0x08000965   Thumb Code   236  gpio.o(i.gpio_init)
-    main                                     0x08000a55   Thumb Code    24  main.o(i.main)
-    Region$$Table$$Base                      0x08000a6c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000a8c   Number         0  anon$$obj.o(Region$$Table)
+    LL_Init1msTick                           0x080002c5   Thumb Code    34  py32f002b_ll_utils.o(i.LL_Init1msTick)
+    LL_RCC_GetSystemClocksFreq               0x080002fd   Thumb Code    28  py32f002b_ll_rcc.o(i.LL_RCC_GetSystemClocksFreq)
+    LL_SetSystemCoreClock                    0x08000319   Thumb Code     6  py32f002b_ll_utils.o(i.LL_SetSystemCoreClock)
+    LL_TIM_Init                              0x08000341   Thumb Code   100  py32f002b_ll_tim.o(i.LL_TIM_Init)
+    LL_USART_Init                            0x080003cd   Thumb Code   108  py32f002b_ll_usart.o(i.LL_USART_Init)
+    RCC_GetHCLKClockFreq                     0x08000681   Thumb Code    34  py32f002b_ll_rcc.o(i.RCC_GetHCLKClockFreq)
+    RCC_GetPCLK1ClockFreq                    0x080006ad   Thumb Code    32  py32f002b_ll_rcc.o(i.RCC_GetPCLK1ClockFreq)
+    RCC_GetSystemClockFreq                   0x080006d5   Thumb Code   100  py32f002b_ll_rcc.o(i.RCC_GetSystemClockFreq)
+    SystemInit                               0x08000745   Thumb Code    60  system_py32f002b.o(i.SystemInit)
+    System_Clock_Config                      0x08000791   Thumb Code   164  sys.o(i.System_Clock_Config)
+    TIM14_IRQHandler                         0x0800083d   Thumb Code    70  time.o(i.TIM14_IRQHandler)
+    TIM1_BRK_UP_TRG_COM_IRQHandler           0x08000895   Thumb Code    30  time.o(i.TIM1_BRK_UP_TRG_COM_IRQHandler)
+    Timer14_1ms_init                         0x080008b9   Thumb Code    86  time.o(i.Timer14_1ms_init)
+    Timer1_10us_init                         0x08000919   Thumb Code    86  time.o(i.Timer1_10us_init)
+    USART1_IRQHandler                        0x08000975   Thumb Code    40  uart.o(i.USART1_IRQHandler)
+    USart1_Send_ASCII_Back                   0x080009a5   Thumb Code    28  uart.o(i.USart1_Send_ASCII_Back)
+    __scatterload_copy                       0x080009c5   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x080009d3   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x080009d5   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    app_control                              0x080009e5   Thumb Code   102  app.o(i.app_control)
+    gpio_init                                0x08000a5d   Thumb Code   236  gpio.o(i.gpio_init)
+    main                                     0x08000b4d   Thumb Code    28  main.o(i.main)
+    uart_init                                0x08000b69   Thumb Code   248  uart.o(i.uart_init)
+    AHBPrescTable                            0x08000c6c   Data          64  system_py32f002b.o(.constdata)
+    APBPrescTable                            0x08000cac   Data          32  system_py32f002b.o(.constdata)
+    HSIFreqTable                             0x08000ccc   Data          32  system_py32f002b.o(.constdata)
+    Region$$Table$$Base                      0x08000cec   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000d0c   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_py32f002b.o(.data)
-    f_ev1527                                 0x20000004   Data           1  ev1527.o(.data)
-    ev1527_time                              0x20000005   Data           1  ev1527.o(.data)
-    ev1527_time_count_down                   0x20000006   Data           1  ev1527.o(.data)
-    ev1527_count                             0x20000008   Data           2  ev1527.o(.data)
-    ev1527_status                            0x2000000a   Data           1  ev1527.o(.data)
-    ev1527_step                              0x2000000b   Data           1  ev1527.o(.data)
-    ev1527_data                              0x2000000c   Data           4  ev1527.o(.data)
-    ev1527_data_buffer                       0x20000010   Data           4  ev1527.o(.data)
-    Flag_1ms                                 0x20000014   Data           1  time.o(.data)
-    Count_1s                                 0x20000018   Data           4  time.o(.data)
-    Flag_1s                                  0x2000001c   Data           1  time.o(.data)
-    __initial_sp                             0x20000420   Data           0  startup_py32f002bxx.o(STACK)
+    Flag_1ms                                 0x20000004   Data           1  time.o(.data)
+    Count_1s                                 0x20000008   Data           4  time.o(.data)
+    Flag_1s                                  0x2000000c   Data           1  time.o(.data)
+    rx_data                                  0x2000000d   Data           1  uart.o(.data)
+    __initial_sp                             0x20000410   Data           0  startup_py32f002bxx.o(STACK)
 
 
 
@@ -503,71 +512,82 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000aac, Max: 0x00006000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000d1c, Max: 0x00006000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000a8c, Max: 0x00006000, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x08000000   0x08000000   0x000000c0   Data   RO           65    RESET               startup_py32f002bxx.o
-    0x080000c0   0x080000c0   0x00000000   Code   RO         1008  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x080000c0   0x080000c0   0x00000004   Code   RO         1015    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x080000c4   0x080000c4   0x00000004   Code   RO         1018    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         1020    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x080000c8   0x080000c8   0x00000000   Code   RO         1022    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x080000c8   0x080000c8   0x00000008   Code   RO         1023    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x080000d0   0x080000d0   0x00000004   Code   RO         1030    .ARM.Collect$$$$0000000E  mc_p.l(entry12b.o)
-    0x080000d4   0x080000d4   0x00000000   Code   RO         1025    .ARM.Collect$$$$0000000F  mc_p.l(entry10a.o)
-    0x080000d4   0x080000d4   0x00000000   Code   RO         1027    .ARM.Collect$$$$00000011  mc_p.l(entry11a.o)
-    0x080000d4   0x080000d4   0x00000004   Code   RO         1016    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
-    0x080000d8   0x080000d8   0x0000001c   Code   RO           66    .text               startup_py32f002bxx.o
-    0x080000f4   0x080000f4   0x0000002c   Code   RO         1011    .text               mc_p.l(uidiv.o)
-    0x08000120   0x08000120   0x00000024   Code   RO         1013    .text               mc_p.l(memseta.o)
-    0x08000144   0x08000144   0x00000024   Code   RO         1031    .text               mc_p.l(init.o)
-    0x08000168   0x08000168   0x0000001c   Code   RO            3    i.DelayTime         system_py32f002b.o
-    0x08000184   0x08000184   0x0000001c   Code   RO          300    i.LL_APB1_GRP2_EnableClock  time.o
-    0x080001a0   0x080001a0   0x000000fa   Code   RO          616    i.LL_GPIO_Init      py32f002b_ll_gpio.o
-    0x0800029a   0x0800029a   0x00000012   Code   RO          259    i.LL_GPIO_IsInputPinSet  ev1527.o
-    0x080002ac   0x080002ac   0x00000004   Code   RO          163    i.LL_GPIO_SetOutputPin  gpio.o
-    0x080002b0   0x080002b0   0x00000008   Code   RO          229    i.LL_GPIO_TogglePin  app.o
-    0x080002b8   0x080002b8   0x0000001c   Code   RO          164    i.LL_IOP_GRP1_EnableClock  gpio.o
-    0x080002d4   0x080002d4   0x00000028   Code   RO          663    i.LL_Init1msTick    py32f002b_ll_utils.o
-    0x080002fc   0x080002fc   0x0000000c   Code   RO          665    i.LL_SetSystemCoreClock  py32f002b_ll_utils.o
-    0x08000308   0x08000308   0x00000008   Code   RO          301    i.LL_TIM_ClearFlag_UPDATE  time.o
-    0x08000310   0x08000310   0x0000000a   Code   RO          302    i.LL_TIM_EnableCounter  time.o
-    0x0800031a   0x0800031a   0x0000000a   Code   RO          303    i.LL_TIM_EnableIT_UPDATE  time.o
-    0x08000324   0x08000324   0x0000006c   Code   RO          725    i.LL_TIM_Init       py32f002b_ll_tim.o
-    0x08000390   0x08000390   0x00000010   Code   RO          304    i.LL_TIM_IsActiveFlag_UPDATE  time.o
-    0x080003a0   0x080003a0   0x00000010   Code   RO          305    i.LL_TIM_IsEnabledIT_UPDATE  time.o
-    0x080003b0   0x080003b0   0x00000014   Code   RO          306    i.NVIC_EnableIRQ    time.o
-    0x080003c4   0x080003c4   0x00000078   Code   RO          307    i.NVIC_SetPriority  time.o
-    0x0800043c   0x0800043c   0x0000004c   Code   RO            5    i.SystemInit        system_py32f002b.o
-    0x08000488   0x08000488   0x000000ac   Code   RO          201    i.System_Clock_Config  sys.o
-    0x08000534   0x08000534   0x00000058   Code   RO          308    i.TIM14_IRQHandler  time.o
-    0x0800058c   0x0800058c   0x00000028   Code   RO          309    i.TIM1_BRK_UP_TRG_COM_IRQHandler  time.o
-    0x080005b4   0x080005b4   0x00000060   Code   RO          310    i.Timer14_1ms_init  time.o
-    0x08000614   0x08000614   0x0000005c   Code   RO          311    i.Timer1_10us_init  time.o
-    0x08000670   0x08000670   0x0000000e   Code   RO         1035    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x0800067e   0x0800067e   0x00000002   Code   RO         1036    i.__scatterload_null  mc_p.l(handlers.o)
-    0x08000680   0x08000680   0x0000000e   Code   RO         1037    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x0800068e   0x0800068e   0x00000002   PAD
-    0x08000690   0x08000690   0x0000005c   Code   RO          230    i.app_control       app.o
-    0x080006ec   0x080006ec   0x0000002c   Code   RO          260    i.ev1527_exit       ev1527.o
-    0x08000718   0x08000718   0x0000024c   Code   RO          261    i.ev1527_proc       ev1527.o
-    0x08000964   0x08000964   0x000000f0   Code   RO          165    i.gpio_init         gpio.o
-    0x08000a54   0x08000a54   0x00000018   Code   RO           72    i.main              main.o
-    0x08000a6c   0x08000a6c   0x00000020   Data   RO         1033    Region$$Table       anon$$obj.o
-
-
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000a8c, Size: 0x00000420, Max: 0x00000c00, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000d0c, Max: 0x00006000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08000a8c   0x00000004   Data   RW            7    .data               system_py32f002b.o
-    0x20000004   0x08000a90   0x00000010   Data   RW          263    .data               ev1527.o
-    0x20000014   0x08000aa0   0x00000009   Data   RW          313    .data               time.o
-    0x2000001d   0x08000aa9   0x00000003   PAD
-    0x20000020        -       0x00000400   Zero   RW           63    STACK               startup_py32f002bxx.o
+    0x08000000   0x08000000   0x000000c0   Data   RO            3    RESET               startup_py32f002bxx.o
+    0x080000c0   0x080000c0   0x00000000   Code   RO         1017  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x080000c0   0x080000c0   0x00000004   Code   RO         1024    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x080000c4   0x080000c4   0x00000004   Code   RO         1027    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         1029    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x080000c8   0x080000c8   0x00000000   Code   RO         1031    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x080000c8   0x080000c8   0x00000008   Code   RO         1032    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x080000d0   0x080000d0   0x00000004   Code   RO         1039    .ARM.Collect$$$$0000000E  mc_p.l(entry12b.o)
+    0x080000d4   0x080000d4   0x00000000   Code   RO         1034    .ARM.Collect$$$$0000000F  mc_p.l(entry10a.o)
+    0x080000d4   0x080000d4   0x00000000   Code   RO         1036    .ARM.Collect$$$$00000011  mc_p.l(entry11a.o)
+    0x080000d4   0x080000d4   0x00000004   Code   RO         1025    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x080000d8   0x080000d8   0x0000001c   Code   RO            4    .text               startup_py32f002bxx.o
+    0x080000f4   0x080000f4   0x0000002c   Code   RO         1020    .text               mc_p.l(uidiv.o)
+    0x08000120   0x08000120   0x00000024   Code   RO         1022    .text               mc_p.l(memseta.o)
+    0x08000144   0x08000144   0x00000024   Code   RO         1040    .text               mc_p.l(init.o)
+    0x08000168   0x08000168   0x0000001c   Code   RO           12    i.DelayTime         system_py32f002b.o
+    0x08000184   0x08000184   0x0000001c   Code   RO          259    i.LL_APB1_GRP2_EnableClock  time.o
+    0x080001a0   0x080001a0   0x000000fa   Code   RO          625    i.LL_GPIO_Init      py32f002b_ll_gpio.o
+    0x0800029a   0x0800029a   0x00000004   Code   RO          163    i.LL_GPIO_SetOutputPin  gpio.o
+    0x0800029e   0x0800029e   0x00000008   Code   RO          229    i.LL_GPIO_TogglePin  app.o
+    0x080002a6   0x080002a6   0x00000002   PAD
+    0x080002a8   0x080002a8   0x0000001c   Code   RO          164    i.LL_IOP_GRP1_EnableClock  gpio.o
+    0x080002c4   0x080002c4   0x00000028   Code   RO          672    i.LL_Init1msTick    py32f002b_ll_utils.o
+    0x080002ec   0x080002ec   0x00000010   Code   RO          934    i.LL_RCC_GetSysClkSource  py32f002b_ll_rcc.o
+    0x080002fc   0x080002fc   0x0000001c   Code   RO          935    i.LL_RCC_GetSystemClocksFreq  py32f002b_ll_rcc.o
+    0x08000318   0x08000318   0x0000000c   Code   RO          674    i.LL_SetSystemCoreClock  py32f002b_ll_utils.o
+    0x08000324   0x08000324   0x00000008   Code   RO          260    i.LL_TIM_ClearFlag_UPDATE  time.o
+    0x0800032c   0x0800032c   0x0000000a   Code   RO          261    i.LL_TIM_EnableCounter  time.o
+    0x08000336   0x08000336   0x0000000a   Code   RO          262    i.LL_TIM_EnableIT_UPDATE  time.o
+    0x08000340   0x08000340   0x0000006c   Code   RO          734    i.LL_TIM_Init       py32f002b_ll_tim.o
+    0x080003ac   0x080003ac   0x00000010   Code   RO          263    i.LL_TIM_IsActiveFlag_UPDATE  time.o
+    0x080003bc   0x080003bc   0x00000010   Code   RO          264    i.LL_TIM_IsEnabledIT_UPDATE  time.o
+    0x080003cc   0x080003cc   0x00000070   Code   RO          874    i.LL_USART_Init     py32f002b_ll_usart.o
+    0x0800043c   0x0800043c   0x0000000e   Code   RO          875    i.LL_USART_IsEnabled  py32f002b_ll_usart.o
+    0x0800044a   0x0800044a   0x00000132   Code   RO          876    i.LL_USART_SetBaudRate  py32f002b_ll_usart.o
+    0x0800057c   0x0800057c   0x00000014   Code   RO          265    i.NVIC_EnableIRQ    time.o
+    0x08000590   0x08000590   0x00000078   Code   RO          266    i.NVIC_SetPriority  time.o
+    0x08000608   0x08000608   0x00000078   Code   RO          351    i.NVIC_SetPriority  uart.o
+    0x08000680   0x08000680   0x0000002c   Code   RO          938    i.RCC_GetHCLKClockFreq  py32f002b_ll_rcc.o
+    0x080006ac   0x080006ac   0x00000028   Code   RO          939    i.RCC_GetPCLK1ClockFreq  py32f002b_ll_rcc.o
+    0x080006d4   0x080006d4   0x00000070   Code   RO          940    i.RCC_GetSystemClockFreq  py32f002b_ll_rcc.o
+    0x08000744   0x08000744   0x0000004c   Code   RO           14    i.SystemInit        system_py32f002b.o
+    0x08000790   0x08000790   0x000000ac   Code   RO          201    i.System_Clock_Config  sys.o
+    0x0800083c   0x0800083c   0x00000058   Code   RO          267    i.TIM14_IRQHandler  time.o
+    0x08000894   0x08000894   0x00000024   Code   RO          268    i.TIM1_BRK_UP_TRG_COM_IRQHandler  time.o
+    0x080008b8   0x080008b8   0x00000060   Code   RO          269    i.Timer14_1ms_init  time.o
+    0x08000918   0x08000918   0x0000005c   Code   RO          270    i.Timer1_10us_init  time.o
+    0x08000974   0x08000974   0x00000030   Code   RO          352    i.USART1_IRQHandler  uart.o
+    0x080009a4   0x080009a4   0x00000020   Code   RO          353    i.USart1_Send_ASCII_Back  uart.o
+    0x080009c4   0x080009c4   0x0000000e   Code   RO         1044    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x080009d2   0x080009d2   0x00000002   Code   RO         1045    i.__scatterload_null  mc_p.l(handlers.o)
+    0x080009d4   0x080009d4   0x0000000e   Code   RO         1046    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x080009e2   0x080009e2   0x00000002   PAD
+    0x080009e4   0x080009e4   0x00000078   Code   RO          230    i.app_control       app.o
+    0x08000a5c   0x08000a5c   0x000000f0   Code   RO          165    i.gpio_init         gpio.o
+    0x08000b4c   0x08000b4c   0x0000001c   Code   RO           72    i.main              main.o
+    0x08000b68   0x08000b68   0x00000104   Code   RO          354    i.uart_init         uart.o
+    0x08000c6c   0x08000c6c   0x00000080   Data   RO           15    .constdata          system_py32f002b.o
+    0x08000cec   0x08000cec   0x00000020   Data   RO         1042    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08000d0c, Size: 0x00000410, Max: 0x00000c00, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000000   0x08000d0c   0x00000004   Data   RW           16    .data               system_py32f002b.o
+    0x20000004   0x08000d10   0x00000009   Data   RW          272    .data               time.o
+    0x2000000d   0x08000d19   0x00000001   Data   RW          356    .data               uart.o
+    0x2000000e   0x08000d1a   0x00000002   PAD
+    0x20000010        -       0x00000400   Zero   RW            1    STACK               startup_py32f002bxx.o
 
 
 ==============================================================================
@@ -577,22 +597,24 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       100         12          0          0          0       5286   app.o
-       650         62          0         16          0       6840   ev1527.o
+       128         18          0          0          0       5298   app.o
        272          8          0          0          0       8612   gpio.o
-        24          0          0          0          0      22271   main.o
+        28          0          0          0          0      35731   main.o
        250          0          0          0          0       7379   py32f002b_ll_gpio.o
+       240         36          0          0          0      13305   py32f002b_ll_rcc.o
        108          8          0          0          0      26926   py32f002b_ll_tim.o
+       432          4          0          0          0      14348   py32f002b_ll_usart.o
         52         12          0          0          0       2349   py32f002b_ll_utils.o
-        28          8        192          0       1024        632   startup_py32f002bxx.o
+        28          8        192          0       1024        664   startup_py32f002bxx.o
        172          8          0          0          0      12690   sys.o
-       104         20          0          4          0     128496   system_py32f002b.o
-       544         60          0          9          0      34822   time.o
+       104         20        128          4          0     128468   system_py32f002b.o
+       540         60          0          9          0      34818   time.o
+       460         34          0          1          0      22759   uart.o
 
     ----------------------------------------------------------------------
-      2304        198        224         32       1024     256303   Object Totals
+      2816        216        352         16       1024     313347   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         0          0          0          3          0          0   (incl. Padding)
+         2          0          0          2          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -632,15 +654,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2476        214        224         32       1024     255507   Grand Totals
-      2476        214        224         32       1024     255507   ELF Image Totals
-      2476        214        224         32          0          0   ROM Totals
+      2988        232        352         16       1024     312199   Grand Totals
+      2988        232        352         16       1024     312199   ELF Image Totals
+      2988        232        352         16          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2700 (   2.64kB)
-    Total RW  Size (RW Data + ZI Data)              1056 (   1.03kB)
-    Total ROM Size (Code + RO Data + RW Data)       2732 (   2.67kB)
+    Total RO  Size (Code + RO Data)                 3340 (   3.26kB)
+    Total RW  Size (RW Data + ZI Data)              1040 (   1.02kB)
+    Total ROM Size (Code + RO Data + RW Data)       3356 (   3.28kB)
 
 ==============================================================================
 

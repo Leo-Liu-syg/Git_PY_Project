@@ -6,6 +6,7 @@ int main(void)
     gpio_init();           // 初始化 GPIO
     Timer14_1ms_init();
     Timer1_10us_init();
+    uart_init(); // 初始化 UART
 
     while (1)
     {

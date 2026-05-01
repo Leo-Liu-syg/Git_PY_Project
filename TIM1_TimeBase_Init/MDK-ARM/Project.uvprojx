@@ -384,14 +384,14 @@
           <GroupName>Common</GroupName>
           <Files>
             <File>
-              <FileName>system_py32f002b.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\system_py32f002b.c</FilePath>
-            </File>
-            <File>
               <FileName>startup_py32f002bxx.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\startup_py32f002bxx.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_py32f002b.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\system_py32f002b.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -439,16 +439,6 @@
               <FilePath>..\Src\app.h</FilePath>
             </File>
             <File>
-              <FileName>ev1527.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\ev1527.c</FilePath>
-            </File>
-            <File>
-              <FileName>ev1527.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Src\ev1527.h</FilePath>
-            </File>
-            <File>
               <FileName>time.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\time.c</FilePath>
@@ -457,6 +447,16 @@
               <FileName>time.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Src\time.h</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Src\uart.h</FilePath>
             </File>
           </Files>
         </Group>

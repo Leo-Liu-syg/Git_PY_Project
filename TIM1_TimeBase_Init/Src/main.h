@@ -27,7 +27,7 @@ extern "C" {
 #include "gpio.h"
 #include "time.h"
 #include "app.h"
-#include "ev1527.h"
+#include "uart.h"
 
 
 #ifdef __cplusplus
