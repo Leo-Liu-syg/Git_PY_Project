@@ -479,14 +479,14 @@
               <FilePath>..\Src\ev1527.h</FilePath>
             </File>
             <File>
-              <FileName>flash.c</FileName>
+              <FileName>Flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\flash.c</FilePath>
+              <FilePath>..\Src\Flash.c</FilePath>
             </File>
             <File>
-              <FileName>flash.h</FileName>
+              <FileName>Flash.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Src\flash.h</FilePath>
+              <FilePath>..\Src\Flash.h</FilePath>
             </File>
           </Files>
         </Group>

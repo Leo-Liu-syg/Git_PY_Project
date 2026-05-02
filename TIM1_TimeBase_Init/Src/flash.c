@@ -1,215 +1,209 @@
-#include "flash.h"
+/* 包含头文件 ------------------------------------------------------------------*/
+#include "Flash.h"
 
-/*************************************************************/
-/* 全局变量定义（存储在 RAM 中，最终会写入 Flash 掉电保存）     */
-/*************************************************************/
-volatile uint32_t remote_cur = 0;  /* 当前遥控器索引 */
-volatile uint32_t devices_cur = 0; /* 当前设备索引 */
-volatile uint32_t sos_time = 4;    /* 报警持续时间：0=60s 1=5min 2=15min 3=30min 4=无限 */
-volatile uint32_t sos_mode = 1;    /* 报警模式：0=撤防 1=布防 */
-volatile uint32_t sos_urgency = 1; /* 报警类型：0=紧急 1=正常 */
-volatile uint32_t speak_mode = 3;  /* 语音提示类型：0=火灾 1=紧急求助 2=安全 3=单纯报警 */
+/* 私有宏定义 ----------------------------------------------------------------*/
+// 用户Flash操作起始地址
+#define FLASH_USER_START_ADDR     0x08001000
 
-uint32_t remote[6] = {0};    /* 遥控器数据缓冲区（0号为索引，其余为数据） */
-uint32_t devices1[30] = {0}; /* 设备组1数据缓冲区 */
-uint32_t devices2[30] = {0}; /* 设备组2数据缓冲区 */
+/* 私有变量 -------------------------------------------------------------------*/
+// 要写入Flash的数据数组（共64个32位数据）
+uint32_t DATA[64] = {0x01010101, 0x23456789, 0x3456789A, 0x456789AB, 0x56789ABC, 0x6789ABCD, 0x789ABCDE, 0x89ABCDEF,
+                     0x9ABCDEF0, 0xABCDEF01, 0xBCDEF012, 0xCDEF0123, 0xDEF01234, 0xEF012345, 0xF0123456, 0x01234567,
+                     0x01010101, 0x23456789, 0x3456789A, 0x456789AB, 0x56789ABC, 0x6789ABCD, 0x789ABCDE, 0x89ABCDEF,
+                     0x9ABCDEF0, 0xABCDEF01, 0xBCDEF012, 0xCDEF0123, 0xDEF01234, 0xEF012345, 0xF0123456, 0x01234567,
+                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
+                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
+                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
+                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
+                    };
 
-uint32_t data_buffer[32] = {0}; /* Flash 页写入临时缓冲区 */
 
-/*************************************************************/
-/* 函数功能：擦除指定 Flash 页                                */
-/* 入口：flash_page_addr 要擦除的页地址                       */
-/* 说明：Flash 写入前必须先擦除（将所有位写为 1）             */
-/*************************************************************/
-void flash_erase_pape(uint32_t flash_page_addr)
+
+
+/**
+  * @brief  擦除用户Flash区域（按页擦除）
+  * @param  无
+  * @retval 无
+  */
+static void Flash_Erase_process(void)
 {
-    /* 等待 Flash 空闲 */
-    while (LL_FLASH_IsActiveFlag_BUSY(FLASH) == 1)
-        ;
+  uint32_t flash_program_start = FLASH_USER_START_ADDR ;                                /* 用户擦除页起始地址 */
+  uint32_t flash_program_end = (FLASH_USER_START_ADDR + sizeof(DATA));                  /* 用户擦除页结束地址 */
+  
+  while (flash_program_start < flash_program_end)
+  {
+    /* 等待Flash不忙（BUSY=0） */
+    while(LL_FLASH_IsActiveFlag_BUSY(FLASH)==1);
 
-    /* 使能“操作完成中断” */
+    /* 使能Flash操作完成中断（EOP） */
     LL_FLASH_EnableIT_EOP(FLASH);
 
     /* 使能页擦除模式 */
     LL_FLASH_EnablePageErase(FLASH);
 
     /* 设置要擦除的页地址 */
-    LL_FLASH_SetEraseAddress(FLASH, flash_page_addr);
+    LL_FLASH_SetEraseAddress(FLASH,flash_program_start);
 
-    /* 等待擦除完成 */
-    while (LL_FLASH_IsActiveFlag_BUSY(FLASH) == 1)
-        ;
-    while (LL_FLASH_IsActiveFlag_EOP(FLASH) == 0)
-        ;
+    /* 等待Flash不忙 */
+    while(LL_FLASH_IsActiveFlag_BUSY(FLASH)==1);
 
-    /* 清除操作完成标志 */
+    /* 等待擦除操作完成（EOP=1） */
+    while(LL_FLASH_IsActiveFlag_EOP(FLASH)==0);
+
+    /* 清除操作完成标志位 */
     LL_FLASH_ClearFlag_EOP(FLASH);
 
-    /* 关闭中断 + 关闭擦除模式 */
+    /* 关闭EOP中断 */
     LL_FLASH_DisableIT_EOP(FLASH);
+
+    /* 关闭页擦除模式 */
     LL_FLASH_DisablePageErase(FLASH);
+    
+    flash_program_start += FLASH_PAGE_SIZE;                                           /* 指向下一页起始地址 */
+  }
 }
 
-/*************************************************************/
-/* 函数功能：将 data_buffer 写入指定 Flash 页                 */
-/* 入口：flash_page_addr 目标页地址                           */
-/*************************************************************/
-void flash_write_pape(uint32_t flash_page_addr)
+/**
+  * @brief  向Flash写入数据
+  * @param  无
+  * @retval 无
+  */
+static void Flash_Write_process(void)
 {
-    uint32_t *src = data_buffer; /* 源数据指针 */
+  uint32_t flash_program_start = FLASH_USER_START_ADDR ;                                /* Flash写入起始地址 */
+  uint32_t flash_program_end = (FLASH_USER_START_ADDR + sizeof(DATA));                  /* Flash写入结束地址 */
+  uint32_t *src = (uint32_t *)DATA;                                                     /* 指向数据数组的指针 */
 
-    /* 等待 Flash 空闲 */
-    while (LL_FLASH_IsActiveFlag_BUSY(FLASH) == 1)
-        ;
-
-    /* 使能操作完成中断 */
+  while (flash_program_start < flash_program_end)
+  {
+    /* 等待Flash不忙 */
+    while(LL_FLASH_IsActiveFlag_BUSY(FLASH)==1);
+    
+    /* 使能EOP中断 */
     LL_FLASH_EnableIT_EOP(FLASH);
 
     /* 使能页编程模式 */
     LL_FLASH_EnablePageProgram(FLASH);
 
-    /* 执行整页写入 */
-    LL_FLASH_PageProgram(FLASH, flash_page_addr, src);
-
+    /* 执行页编程（写入数据） */
+    LL_FLASH_PageProgram(FLASH,flash_program_start,src);
+    
+    /* 等待Flash不忙 */
+    while(LL_FLASH_IsActiveFlag_BUSY(FLASH)==1);
+    
     /* 等待写入完成 */
-    while (LL_FLASH_IsActiveFlag_BUSY(FLASH) == 1)
-        ;
-    while (LL_FLASH_IsActiveFlag_EOP(FLASH) == 0)
-        ;
-
-    /* 清除标志 + 关闭中断 + 关闭编程 */
+    while(LL_FLASH_IsActiveFlag_EOP(FLASH)==0);
+    
+    /* 清除完成标志 */
     LL_FLASH_ClearFlag_EOP(FLASH);
+   
+    /* 关闭EOP中断 */
     LL_FLASH_DisableIT_EOP(FLASH);
+
+    /* 关闭页编程模式 */
     LL_FLASH_DisablePageProgram(FLASH);
+    
+    flash_program_start += FLASH_PAGE_SIZE;                                           /* 指向下一页地址 */
+    src += FLASH_PAGE_SIZE / 4;                                                       /* 指向下一组数据 */
+  }
 }
 
-/*************************************************************/
-/* 函数功能：Flash 页“擦除 + 写入”一体化操作                 */
-/*************************************************************/
-void flash_set_page(uint32_t flash_page_addr)
+/**
+  * @brief  检查Flash是否为空（全0xFFFFFFFF）
+  * @param  无
+  * @retval 无
+  */
+static void Flash_Check_If_Blank(void)
 {
-    LL_FLASH_Unlock(FLASH);            /* 解锁 Flash */
-    flash_erase_pape(flash_page_addr); /* 擦除页 */
-    flash_write_pape(flash_page_addr); /* 写入页 */
-    LL_FLASH_Lock(FLASH);              /* 锁定 Flash */
-}
+  uint32_t addr = 0;
 
-/*************************************************************/
-/* 函数功能：将【控制参数】保存到 Flash                       */
-/* 包括：遥控器索引、设备索引、报警时间、模式、语音类型等     */
-/*************************************************************/
-void Flash_Update_Control()
-{
-    data_buffer[0] = remote_cur;
-    data_buffer[1] = devices_cur;
-    data_buffer[2] = sos_time;
-    data_buffer[3] = sos_mode;
-    data_buffer[4] = speak_mode;
-    data_buffer[5] = sos_urgency;
-
-    flash_set_page(FLASH_PAGE_CONTROL);
-}
-
-/*************************************************************/
-/* 函数功能：将【遥控器数据】保存到 Flash                     */
-/*************************************************************/
-void Flash_Update_Remote()
-{
-    memcpy(data_buffer, remote, (6 * 4)); /* 复制遥控器数据到缓冲区 */
-    flash_set_page(FLASH_PAGE_REMOTE);    /* 写入 Flash */
-}
-
-/*************************************************************/
-/* 函数功能：将【两组设备数据】分别保存到 Flash               */
-/*************************************************************/
-void Flash_Update_Devices()
-{
-    memcpy(data_buffer, devices1, (30 * 4));
-    flash_set_page(FLASH_PAGE_DEVICES1);
-
-    memcpy(data_buffer, devices2, (30 * 4));
-    flash_set_page(FLASH_PAGE_DEVICES2);
-}
-
-/*************************************************************/
-/* 函数功能：恢复出厂设置（清空所有遥控器、设备数据）         */
-/* 说明：将 Flash 全部写 0xFF，索引归零，重新保存             */
-/*************************************************************/
-void Flash_Recovery()
-{
-    memset(remote, 0xff, (6 * 4));
-    memset(devices1, 0xff, (30 * 4));
-    memset(devices2, 0xff, (30 * 4));
-
-    remote_cur = 0;
-    devices_cur = 0;
-
-    Flash_Update_Remote();
-    Flash_Update_Devices();
-    Flash_Update_Control();
-}
-
-/*************************************************************/
-/* 函数功能：Flash 初始化 + 从 Flash 恢复所有数据到 RAM       */
-/* 说明：上电时执行一次，把保存的配置读回变量中               */
-/*************************************************************/
-void Flash_init()
-{
-    /* 使能时钟 */
-    LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
-    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
-
-    /* 解锁 Flash + 配置 Flash 时序（24MHz） */
-    LL_FLASH_Unlock(FLASH);
-    LL_FLASH_TIMMING_SEQUENCE_CONFIG_24M();
-
-    /* ==================================== */
-    /* 从 Flash 读取【控制参数】到全局变量   */
-    /* ==================================== */
-    remote_cur = HW32_REG(FLASH_PAGE_CONTROL);
-    if (remote_cur >= REMOTE_NUM)
-        remote_cur = 0; /* 非法值保护 */
-
-    devices_cur = HW32_REG(FLASH_PAGE_CONTROL + (4 * 1));
-    if (devices_cur >= DEVICE_NUM)
-        devices_cur = 0;
-
-    sos_time = HW32_REG(FLASH_PAGE_CONTROL + (4 * 2));
-    if (sos_time > 4)
-        sos_time = 4;
-
-    sos_mode = HW32_REG(FLASH_PAGE_CONTROL + (4 * 3));
-    if (sos_mode > 1)
-        sos_mode = 0;
-
-    speak_mode = HW32_REG(FLASH_PAGE_CONTROL + (4 * 4));
-    if (speak_mode > 3)
-        speak_mode = 0;
-
-    sos_urgency = HW32_REG(FLASH_PAGE_CONTROL + (4 * 5));
-    if (sos_urgency > 1)
-        sos_urgency = 0;
-
-    /* ==================================== */
-    /* 从 Flash 读取【遥控器数据】           */
-    /* ==================================== */
-    for (uint8_t i = 0; i < REMOTE_NUM; i++)
+  while (addr < sizeof(DATA))
+  {
+    // 读取地址数据，如果不是0xFFFFFFFF，说明非空，擦除失败
+    if (0xFFFFFFFF != HW32_REG(FLASH_USER_START_ADDR + addr))
     {
-        remote[i] = HW32_REG(FLASH_PAGE_REMOTE + (4 * i));
+      APP_ErrorHandler();
     }
-
-    /* ==================================== */
-    /* 从 Flash 读取【两组设备数据】         */
-    /* ==================================== */
-    for (uint8_t i = 0; i < 30; i++)
-    {
-        devices1[i] = HW32_REG(FLASH_PAGE_DEVICES1 + (4 * i));
-    }
-    for (uint8_t i = 0; i < 30; i++)
-    {
-        devices2[i] = HW32_REG(FLASH_PAGE_DEVICES2 + (4 * i));
-    }
-
-    /* 锁定 Flash */
-    // LL_FLASH_Lock(FLASH);
+    addr += 4;  // 按4字节（32位）检查
+  }
 }
+
+/**
+  * @brief  校验Flash写入的数据是否正确
+  * @param  无
+  * @retval 无
+  */
+static void Flash_Verify(void)
+{
+  uint32_t addr = 0;
+
+  while (addr < sizeof(DATA))
+  {
+    // 对比：读取Flash数据 vs 原始数组数据
+    if (DATA[addr / 4] != HW32_REG(FLASH_USER_START_ADDR + addr))
+    {
+      APP_ErrorHandler();  // 不一致则进入错误处理
+    }
+    addr += 4;
+  }
+}
+
+
+void Flash_update_process(void)
+{
+
+  /* 解锁Flash（必须解锁才能擦写） */
+  LL_FLASH_Unlock(FLASH);
+
+  /* 配置Flash时序（24MHz系统时钟下使用） */
+  LL_FLASH_TIMMING_SEQUENCE_CONFIG_24M();
+
+  /* 擦除Flash */
+  Flash_Erase_process();
+
+  /* 检查Flash是否为空 */
+  Flash_Check_If_Blank();
+
+  /* 向Flash写入用户数据 */
+  Flash_Write_process();
+
+  /* 锁定Flash，禁止擦写操作 */
+  LL_FLASH_Lock(FLASH);
+
+  /* 校验写入的数据是否正确 */
+  Flash_Verify();
+
+}
+/**
+  * @brief  错误处理函数（出错时进入死循环）
+  * @param  无
+  * @retval 无
+  */
+void APP_ErrorHandler(void)
+{
+  /* 无限循环 */
+  while (1)
+  {
+  }
+}
+
+
+#ifdef  USE_FULL_ASSERT
+/**
+  * @brief  断言失败时执行（报告文件名和行号）
+  * @param  file：指向源文件名
+  * @param  line：断言出错的行号
+  * @retval 无
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* 可自定义打印错误信息：printf("参数错误：文件 %s 行号 %d\r\n", file, line) */
+  
+  /* 无限循环 */
+  while (1)
+  {
+  }
+}
+#endif /* USE_FULL_ASSERT */
+
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

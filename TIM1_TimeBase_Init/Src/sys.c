@@ -3,22 +3,25 @@
 
 // 包含主函数头文件（芯片寄存器、宏定义）
 
-
 /**
-  * @brief  系统时钟初始化配置（让芯片跑起来）
-  * @param  无
-  * @retval 无
-  */
+ * @brief  系统时钟初始化配置（让芯片跑起来）
+ * @param  无
+ * @retval 无
+ */
 void System_Clock_Config(void)
 {
-    /* 使能 SYSCFG 系统配置控制器时钟 */
+    /* 修改HSI前先设置Flash等待周期 */
+    LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
+
+    /* 使能SYSCFG和PWR时钟 */
     LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_SYSCFG);
+    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 
     /* 使能内部高速时钟 HSI（芯片自带的8MHz/24MHz时钟源） */
     LL_RCC_HSI_Enable();
 
     /* 等待 HSI 时钟稳定 准备好 */
-    while(LL_RCC_HSI_IsReady() != 1)
+    while (LL_RCC_HSI_IsReady() != 1)
     {
         // 这里空循环，一直等到时钟准备好才往下走
     }
@@ -32,7 +35,7 @@ void System_Clock_Config(void)
     LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSISYS);
 
     /* 等待系统时钟切换完成 */
-    while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSISYS)
+    while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSISYS)
     {
         // 空循环，等待切换成功
     }

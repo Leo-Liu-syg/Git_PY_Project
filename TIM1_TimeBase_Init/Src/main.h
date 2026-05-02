@@ -22,6 +22,7 @@ extern "C" {
 #include "py32f002b_ll_tim.h"
 #include "py32f002b_ll_flash.h"
 #include "py32f002b_ll_usart.h"
+#include "py32f002bxx_ll_Start_Kit.h"
 
 #include "sys.h"
 #include "gpio.h"
