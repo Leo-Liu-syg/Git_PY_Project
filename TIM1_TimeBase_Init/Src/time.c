@@ -87,7 +87,9 @@ void Timer14_1ms_init(void)
 
 volatile unsigned char Flag_1ms = 0; // 1ms标志位
 volatile unsigned int Count_1s = 0;  // 1秒计数器
+volatile unsigned int Count_3s = 0;  // 3秒计数器
 volatile unsigned char Flag_1s = 0;  // 1秒标志位
+volatile unsigned char Flag_3s = 0;  // 3秒标志位
 /**
  * @brief  TIM14 中断服务函数
  * @note   每1ms进入一次 → 设置1ms标志
@@ -102,10 +104,16 @@ void TIM14_IRQHandler(void)
         Flag_1ms = 1;                   // 设置1ms标志
 
         Count_1s++;           // 1秒计数器+1
+        Count_3s++;           // 3秒计数器+1
         if (Count_1s >= 1000) // 计数满1000ms
         {
             Count_1s = 0; // 清空1秒计数器
             Flag_1s = 1;  // 设置1秒标志
+        }
+        if (Count_3s >= 3000)
+        {
+            Count_3s = 0; // 清空3秒计数器
+            Flag_3s = 1;  // 设置3秒标志
         }
     }
 }

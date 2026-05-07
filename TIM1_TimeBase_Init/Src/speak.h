@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-enum speak_58042
+typedef enum speak_58042
 {
     SPEAK_STOP = 1,
     SPEAK_NORMAL,              // 正常模式切换成功
@@ -19,8 +19,10 @@ enum speak_58042
     SPEAK_PLACE,               // 布防成功
     SPEAK_UNPLACE,             // 撤防成功
     SPEAK_CANCEL,              // 取消对码
-};
+}Speak;
 
-void speak(uint8_t code);
+
+
+void SPEAKING(Speak speak_code);
 
 #endif

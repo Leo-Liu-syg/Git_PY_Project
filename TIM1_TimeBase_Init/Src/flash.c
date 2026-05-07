@@ -2,21 +2,13 @@
 #include "Flash.h"
 
 /* 私有宏定义 ----------------------------------------------------------------*/
-// 用户Flash操作起始地址
-#define FLASH_USER_START_ADDR     0x08001000
+
 
 /* 私有变量 -------------------------------------------------------------------*/
 // 要写入Flash的数据数组（共64个32位数据）
-uint32_t DATA[64] = {0x01010101, 0x23456789, 0x3456789A, 0x456789AB, 0x56789ABC, 0x6789ABCD, 0x789ABCDE, 0x89ABCDEF,
-                     0x9ABCDEF0, 0xABCDEF01, 0xBCDEF012, 0xCDEF0123, 0xDEF01234, 0xEF012345, 0xF0123456, 0x01234567,
-                     0x01010101, 0x23456789, 0x3456789A, 0x456789AB, 0x56789ABC, 0x6789ABCD, 0x789ABCDE, 0x89ABCDEF,
-                     0x9ABCDEF0, 0xABCDEF01, 0xBCDEF012, 0xCDEF0123, 0xDEF01234, 0xEF012345, 0xF0123456, 0x01234567,
-                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
-                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
-                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
-                     0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa, 0x55555555, 0x23456789, 0xaaaaaaaa,
-                    };
+uint32_t DATA[64] = {0};
 
+                    
 
 
 
@@ -187,6 +179,18 @@ void APP_ErrorHandler(void)
   }
 }
 
+uint32_t flash_read_word(uint32_t addr)
+{
+    return *(uint32_t *)addr;
+}
+
+void flash_read_buf(uint32_t addr, uint32_t *buf, uint16_t len)
+{
+    for(uint16_t i=0; i<len; i++)
+    {
+        buf[i] = *(uint32_t*)(addr + i*4);
+    }
+}
 
 #ifdef  USE_FULL_ASSERT
 /**

@@ -2,7 +2,8 @@
 #define __MAIN_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <stdint.h>
@@ -29,15 +30,12 @@ extern "C" {
 #include "ev1527.h"
 #include "uart.h"
 #include "time.h"
-#include "app.h"
 #include "speak.h"
 #include "flash.h"
-
-
+#include "app.h"
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
